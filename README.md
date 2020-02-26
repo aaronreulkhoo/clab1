@@ -1,4 +1,4 @@
-# 50005Lab1
+# 50005 CSE Lab 1
 
 #### Implementation of main_loop() function
 
@@ -6,7 +6,7 @@ For each job with a corresponding `num` and `action`, the process is spinlocked 
 
 If a process is alive where `waitpid(children_processes[i], NULL, WNOHANG)==0` and also available to work `shmPTR_jobs_buffer[i].task_status==0`, then a job is assigned to the respective `shmPTR_jobs_buffer` shared memory buffer, and `loop` is set to `false` while a `break` statement is given to proceed to the next available job.
 
-Otherwise, if the child is dead, the previous task is marked as completed, then the process is revived through a `fork()`. The child process is calls `job_dispatch(i)` with its respective process number `i`, while the parents assigns the process a new job and proceeds to the next job using the same procedure as above.
+Otherwise, if the child is dead, the previous task is marked as completed, and the process is revived through a `fork()`. The child process then calls `job_dispatch(i)` with its respective process number `i`, while the parents assigns the process a new job and proceeds to the next job using the same procedure as above.
 
 ``````c
 void main_loop(char *fileName) {
